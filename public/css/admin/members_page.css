@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10 Apr, 2020, 10:45:44 AM
+    Author     : ajay
+*/
+
+.bg-grey {
+    background: #eee;
+}
+.card-box{
+    border: 0px;
+    border-radius: 10px !important;
+    background: #fff;
+}
+
+.radio-primary input[type=radio]:checked+label::before{
+    border-color: #003E74;
+}
+.radio-primary input[type=radio]:checked+label::after{
+    background-color: #003E74;
+}
+.checkbox-primary input[type=checkbox]:checked+label::before{
+    background-color: #003E74;
+    border-color: #003E74;
+}

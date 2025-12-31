@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15 May, 2020, 3:09:57 PM
+    Author     : ajay
+*/
+
+@media (max-width:1200px) {
+    .hero_sec .details{ margin-top:60px;}
+    .hero_sec h2{ font-size:30px;}
+    .cat_section .row{ margin:0 -20px;}
+    .cat_section [class*="col-"]{ padding:0 20px;}
+    .cat_section .cat_block{ padding-left:10px; padding-right:10px;}
+
+}
+
+/************ Main **************/
+@media (max-width: 991px) {
+    .hero_sec .details{ margin-top:30px;}
+    .search .form-control{ font-size:16px;}
+    .search .btn-default{ font-size:16px;}
+    .service_sec{ padding:40px 0;}
+    .service_sec .service_inn{ padding:30px 20px 20px 20px;}
+    .form_sec{ padding:30px 20px 20px 20px;}
+    .pro_sec{ padding:40px 0 0 0;}
+    .pro_sec .details{ margin-top:40px;}
+    .footer_sec p{ font-size:13px;}
+    .add_info{ font-size:13px;}
+
+    .need_sec{ padding:40px 0 30px 0;}
+    .testimonial_sec{ padding:60px 0 40px 0; -webkit-clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%); clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);}
+    
+    .pro_sec img{
+        max-width: 100%;
+    }
+
+}
+
+@media (max-width: 767px) {
+    ul.list_data.mb-0{ margin-bottom:0;}
+    .global_title{ font-size:20px; margin-bottom:28px;}
+
+    .hero_sec .details{ margin:5px 0 20px 0; width:100%; float:left; text-align:center;}
+    .hero_sec h1{ font-size:20px;}
+    .hero_sec h3{ font-size:15px;}
+    .search .btn{ font-size:15px;}
+    .pro_sec .details{ margin-top:0; padding-bottom:15px;}
+    .pro_sec p{ font-size:14px; line-height:23px;}
+    .pro_sec figure{ text-align:center;}
+    .pro_sec .order-1{ order:inherit;}
+    .nav_sec .navbar { padding: 15px 0px !important; }
+}
+
+/************ iphone **************/
+@media (max-width:600px) {
+    .service_sec .service_inn{ padding:30px 10px 20px 10px;}
+    .check_detail label{ font-size:13px;}
+    .check_detail input[type="checkbox"] + .lbl, .check_detail input[type="radio"] + .lbl{ position:relative; padding-left:25px;}
+    .check_detail input[type="checkbox"] + .lbl::before, .check_detail input[type="radio"] + .lbl::before { position:absolute; left:0; top:5px;}
+    .form_block .field.field_2{ height:130px;}
+    .btn_block .btn{ font-size:15px;}
+    .form_sec .btn_block .btn{ padding:12px 20px;}
+    .form_sec{ padding:30px 15px 20px 15px;}
+    .test_block .top_info figure{ margin-right:15px;}
+    .test_block .top_info h4{ font-size:14px;}
+    .test_block .rate_info{ font-size:14px;}
+    .cat_section .row{ margin:0 -15px;}
+    .cat_section [class*="col-"]{ padding:0 15px;}
+}

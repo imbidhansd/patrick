@@ -1,0 +1,43 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+
+
+
+    Redirect 301 /gravina's-window-center-of-littleton/24934219 https://pros.trustpatrick.com/gravina-s-window-center-of-littleton
+    Redirect 301 /m.k.-bolling-agency-of-farmers-insurance/84432519 https://pros.trustpatrick.com/m-k-bolling-agency-of-farmers-insurance
+    Redirect 301 /wills-&-wellness-estate-planning/87745519 https://pros.trustpatrick.com/wills-wellness-estate-planning
+    Redirect 301 /viaterra-real-estate-associates/22751820 https://pros.trustpatrick.com/viaterra-real-estate-associates
+    Redirect 301 /rocky-mountain-concrete-specialists/66640820 https://pros.trustpatrick.com/rocky-mountain-concrete-specialists
+    Redirect 301 /parkhurst-realty/25376120 https://pros.trustpatrick.com/parkhurst-realty
+    Redirect 301 /alpine-roofing-ltd/43715820 https://pros.trustpatrick.com/alpine-roofing-ltd
+    Redirect 301 /scott-rice-insurance-agency-inc/50113220 https://pros.trustpatrick.com/scott-rice-insurance-agency-inc
+    Redirect 301 /american-heritage-restoration,-llc/24048220 https://pros.trustpatrick.com/american-heritage-restoration-llc
+    Redirect 301 /ellmann-&-ellmann,-p.c./85044620 https://pros.trustpatrick.com/ellmann-ellmann-p-c
+    Redirect 301 /applied-construction-corp./53970220 https://pros.trustpatrick.com/applied-construction-corp
+    Redirect 301 /len-lyall-chevrolet,-inc/80086320 https://pros.trustpatrick.com/len-lyall-chevrolet-inc
+    Redirect 301 /colorado-carpet-&-flooring,-inc./69243520 https://pros.trustpatrick.com/colorado-carpet-flooring-inc
+    Redirect 301 /apple-aire/24442720 https://pros.trustpatrick.com/apple-aire
+    Redirect 301 /strong-financial-group,-inc./63709420 https://pros.trustpatrick.com/strong-financial-group-inc
+    Redirect 301 /allure-homes-llc/70325820 https://pros.trustpatrick.com/allure-homes-llc
+    Redirect 301 /jm-heating-and-air/23162520 https://pros.trustpatrick.com/jm-heating-and-air
+    Redirect 301 /benefits-group-of-the-rockies,-llc/36433520 https://pros.trustpatrick.com/benefits-group-of-the-rockies-llc
+    Redirect 301 /kgw-flooring/20154120 https://pros.trustpatrick.com/kgw-flooring
+</IfModule>

@@ -1,0 +1,410 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15 May, 2020, 3:09:57 PM
+    Author     : ajay
+*/
+
+* {
+	font-family: "Source Sans Pro",sans-serif !important;
+}
+
+
+/******************** New Home Page **********************/
+.hero_sec{ width:100%; float:left; padding:35px 0 0 0; margin:0; background:url(../../images/find_a_pro/hero_banner.jpg) no-repeat center center; background-size:cover;}
+.hero_sec .details{ padding:0; margin:140px 0 0 0;}
+.hero_sec h1{ padding:0; margin:0 0 30px 0; font-size:40px; color:#fff; font-weight:700; line-height:normal;}
+.hero_sec h1 strong{ color:#f67112;}
+.hero_sec h3{ padding:0; margin:0 0 15px 0; font-size:20px; color:#fff; font-weight:600;}
+
+.search{ width:250px; padding:0; margin:0; display:inline-block;}
+.search .form-control{ height:60px; padding:0 20px 0 30px; font-size:20px; color:#333; border:none; background:#fff; border-radius:50px;}
+.search .btn{ height:60px; border:none !important; padding:0 20px; font-size:20px; color:#ffffff; text-transform:uppercase; background:#f67112; box-shadow:none !important; border-radius:50px; z-index:5 !important;}
+.search .btn:hover, .search .btn:focus, .search .btn:active:focus{ background:#e15e00; color:#fff;}
+
+.search{ width:100%; float:left; padding:0; margin:0 0 15px 0;}
+.search .form-control{ height:60px; padding:0 20px 0 30px; font-size:20px; color:#333; background:#fff; border:none; border-radius:50px; box-shadow:none;}
+.search .btn-default{ height:60px; padding:0 20px; font-size:20px; color:#ffffff; text-transform:uppercase; background:#f67112; border:none; border-radius:50px; z-index:5 !important;}
+.search .btn-default:hover, .search .btn-default:focus{ background:#e15e00; color:#fff;}
+.hero_sec figure{ width:100%; float:left; padding:0; margin:0;}
+
+/************ Category Sec *************/
+.cat_section{ width:100%; float:left; padding:45px 0 15px 0; margin:0; overflow:hidden; background-color: #f6f7f8 }
+.cat_section .row{ margin:0 -25px;}
+.cat_section [class*="col-"]{ padding:0 25px;}
+.global_title{ 
+    padding: 0;
+    margin: 0 0 40px 0;
+    font-size: 45px;
+    color: #003E74;
+    font-weight: 900;
+}
+.cat_section .cat_block{ width:100%; float:left; padding:25px 10px; margin:0 0 30px 0; text-align:center; background:#fff; border:1px solid rgba(0,0,0,0.1); border-radius:7px; box-shadow:0px 4px 15px 0 rgba(33,43,53,.2); -webkit-transition: all .3s ease-in; -moz-transition: all .3s ease-in; -o-transition: all .3s ease-in; transition: all .3s ease-in; }
+.cat_section .cat_block i{ padding:0; margin:0 auto 15px auto; display:block;}
+.cat_section .cat_block h4{ padding:0; margin:0; font-size:13px; color:#6d6e70; font-weight:400;}
+.cat_section .cat_block:hover{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
+.cat_section .cat_block_v1{ width:100%; float:left; padding:10px 10px; margin:0 0 30px 0; text-align:center; background:#fff; border:1px solid rgba(0,0,0,0.1); border-radius:7px; box-shadow:0px 4px 15px 0 rgba(33,43,53,.2); -webkit-transition: all .3s ease-in; -moz-transition: all .3s ease-in; -o-transition: all .3s ease-in; transition: all .3s ease-in; }
+.cat_section .cat_block_v1 h4{ padding:0; margin:0; font-size:16px; color:#003e74; font-weight:600;}
+.cat_section .cat_block_v1 i{ width:100px; padding:0; margin:0 auto 15px auto; display:block;}
+.cat_section .cat_block_v1:hover{-webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
+/************* Service Sec **************/
+.service_sec{ width:100%; float:left; padding:60px 0; margin:0; background:#f6f7f8;}
+.service_sec .service_inn{ width:100%; float:left; padding:40px 40px 20px 40px; margin:0 0 30px 0; background:#fff; border:solid 1px rgba(67,91,108,.3); border-radius:5px;}
+.service_sec .list_grp{ width:100%; max-width:450px; margin:0 auto; display:block;}
+
+.check_detail{ width:100%; float:left; padding:0; margin:0;}
+.check_detail label{ width:100%; font-size:18px; color:#003e74; padding:5px 10px 5px 40px; margin:0; font-weight:600; border-radius:10px; position:relative;}
+.check_detail label:hover{ background:#ededed;}
+
+
+.check_detail label.yellow { margin-bottom: 15px; }
+.check_detail label.green { margin-bottom: 15px; }
+
+
+.check_detail label.red:hover { background-color: rgb(255,0,0); }
+.check_detail label.yellow:hover { background-color: rgb(255,165,0); }
+.check_detail label.green:hover { background-color: rgba(0,255,0); }
+.check_detail input[type=checkbox]+.lbl::before, .check_detail input[type=radio]+.lbl::before { font-family: fontAwesome; font-weight: normal; font-size: 11px; color: #003e74; content: "\a0"; background-color: #fff; border: 2px solid #003e74; border-radius: 0; display: inline-block; text-align: center; vertical-align: middle; height:20px; line-height:17px; min-width:20px; margin-right:10px; margin-top: -4px; position:absolute; left:-30px; top:8px;}
+/* Checked state styles */
+.check_detail input[type=checkbox]:checked+.lbl::before, .check_detail input[type=radio]:checked+.lbl::before { display: inline-block; content: '\f00c'; background-color: #fff; border-color: #003e74;}
+/* Hover state styles */
+.check_detail input[type=checkbox]:hover+.lbl::before, .check_detail input[type=radio]:hover+.lbl::before, .check_detail input[type=checkbox]+.lbl:hover::before, .check_detail  input[type=radio]+.lbl:hover::before {
+    border-color: #003e74;
+}
+/* Shadow when checked or Active */
+.check_detail input[type=checkbox]:active+.lbl::before, .check_detail input[type=radio]:active+.lbl::before, .check_detail input[type=checkbox]:checked:active+.lbl::before, .check_detail input[type=radio]:checked:active+.lbl::before {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+/* Disabled state styles */
+.check_detail input[type=checkbox]:disabled+.lbl::before, .check_detail input[type=radio]:disabled+.lbl::before, .check_detail input[type=checkbox][disabled]+.lbl::before, .check_detail input[type=radio][disabled]+.lbl::before, .check_detail input[type=checkbox].disabled+.lbl::before, .check_detail input[type=radio].disabled+.lbl::before { background-color: #DDD !important; border-color: #CCC !important; box-shadow: none !important; color: #BBB;}
+/* Styles for Radio button */
+.check_detail input[type=radio]+.lbl::before { border-radius: 32px; font-family: Arial, Helvetica, sans-serif; font-size:42px;}
+.check_detail input[type=radio]:checked+.lbl::before { content: "\2022";}
+/* Hiding default checkbox and Radio button design */
+.check_detail input[type=checkbox], .check_detail input[type=radio] { opacity: 0; position: absolute; z-index: 12; width: 18px; height: 18px; }
+/* Disable outline when clicked*/
+.check_detail input[type=checkbox]:checked, .check_detail input[type=radio]:checked, .check_detail input[type=checkbox]:focus, .check_detail input[type=radio]:focus { outline: none !important; }
+.check_detail input[type=checkbox]+.lbl, .check_detail input[type=radio]+.lbl { position: relative; z-index: 11; display: inline-block; margin: 0; min-height: 14px; min-width: 14px;}
+
+.btn_block{ width:100%; float:left; padding:20px 0 0 0; margin:40px 0 0 0; text-align:center; border-top:1px solid #ddd;}
+.btn_block .btn{ 
+    min-width:118px; 
+    padding:12px 15px; 
+    margin:5px; 
+    font-size:18px; 
+    color:#fff; 
+    text-align:center; 
+    border:none; 
+    border-radius:3px; 
+    font-weight:400; 
+    text-shadow:inset 0 1px 0 rgba(255,255,255,.2); 
+    box-shadow:none !important;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: #003e74;
+    color: #fff;
+    border-radius: 0.6rem;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-property: all;
+}
+.btn_block .btn.dark_grey{background: #808080}
+.btn_block .btn:hover{ color:#fff; background:#003e74;transform: scale(1.05,1.05);}
+.btn_block .btn.link{ background:none; font-size:14px; color:#2672a5; text-shadow:0 1px 1px #cacaca;}
+
+.form_sec{ width:100%; float:left; padding:40px 40px 20px 40px; margin:0; background:#fff; border:solid 1px rgba(67,91,108,.3); border-radius:5px;}
+.form_block{ width:100%; float:left; padding:0; margin:0 0 20px 0;}
+.form_block label{ padding:0; margin:0 0 5px 0; font-size:18px; color:#003e74; font-weight:600;}
+.form_block .field{ width:100%; height:40px; padding:0 20px; margin:0; font-size:16px; color:#003e74; font-weight:normal; border:1px solid #dee2e6; background:#fff;}
+.form_block .field.field_2{ height:226px; padding:15px 20px;}
+
+select.select_info{ width:100%; height:40px; float:left; padding:0 28px 0 10px; margin:0; font-size:14px; color:#164072; font-weight:300; border:1px solid #dee2e6; -webkit-appearance: none; -moz-appearance: none; appearance: none; background: url(../../images/find_a_pro/select_arrow.png) no-repeat right 10px center;}
+.form_sec .btn_block{ border-top:none; margin:0; padding:0;}
+.form_sec .btn_block .btn{ padding:12px 40px;}
+
+/************** Need Sec ******************/
+.need_sec{ width:100%; float:left; padding:160px 0; margin:0; background: #fff;}
+ul.list_data{ padding:0; margin:0;}
+ul.list_data li{ padding:0 0 0 32px; margin:0 0 10px 0; font-size:15px; color:#6d6e70; font-weight:300; position:relative;}
+ul.list_data li:after{
+    content:"";
+    width:14px;
+    height:14px;
+    background:#003e74;
+    /*border:4px solid #fff;*/
+    box-shadow:0 0 1px 1px #164072;
+    border-radius:50%;
+    position:absolute;
+    left:0;
+    top:4px;
+}
+ul.list_data li a{ color:#6d6e70;}
+ul.list_data li a:hover{ color:#003e74;}
+.need_sec_1{ margin-bottom:40px;}
+
+/**************** Testimonial Sec ***************/
+.testimonial_sec{ 
+    width:100%; 
+    float:left; 
+    padding:160px 0; 
+    margin:0; 
+    background: linear-gradient(135deg,rgba(0, 62, 116, 0.8),#36404e),url(https://s3.us-west-2.amazonaws.com/images.trustpatrick.com/20221220010717/trust_patrick_reviews_v1.jpg);
+    background-size: auto,cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+}
+.testimonial_sec .global_title{ color:#fff;}
+.testimonial_sec .owl-carousel.owl-drag .owl-item{ padding:15px;}
+.test_block{ width:100%; float:left; padding:20px; margin:0; border-radius:7px; background:#fff; box-shadow:0 2px 8px 0 rgba(33,43,53,.2);}
+.test_block .top_info{ width:100%; float:left; padding:0; margin:0 0 20px 0;}
+.test_block .top_info figure{ width:60px; height:60px; float:left; padding:0; margin:0 35px 0 0; border-radius:50% ; border:1px solid gray;}
+.test_block .top_info figure img{ width:60px; height:60px; padding:3px; border-radius:50%; border:1px solid gray;}
+.test_block .top_info .r_info{ overflow:hidden; padding:10px 0 0 0;}
+.test_block .top_info h4{ padding:0; margin:0 0 5px 0; font-size:16px; color:#003e74; font-weight:500;}
+.test_block .rate_info{ padding:0; margin:0; font-size:16px; color:#fab31d;}
+.test_block .rate_info i{ padding:0; margin:0 1px;}
+
+.test_block p{ padding:0; margin:0; font-size:14px; color:#003e74;}
+
+/******* Pro Sec *******/
+.pro_sec{ width:100%; float:left;  padding:160px 0; margin:0;}
+.pro_sec .container{ max-width:1000px;}
+.pro_sec .global_title{ margin-bottom:20px;}
+.pro_sec .details{ width:100%; float:left;  padding:0; margin:80px 0 0 0; padding-left: 80px;}
+.pro_sec p{ padding:0; margin:0 0 20px 0; font-size:16px; color:#003e74; line-height:30px;}
+.pro_sec .btn_block{ text-align:left; border:none; padding:0; margin:0;}
+.pro_sec .btn_block .btn{ 
+    margin: 0;
+    font-size: 16px;
+    padding: 12px 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: #003e74;
+    color: #fff;
+    border-radius: 0.6rem;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-property: all;
+}
+.pro_sec .btn_block .btn:hover
+{
+    transform: scale(1.05,1.05);
+}
+.pro_sec figure{ width:100%; float:left; margin:0; padding:0;}
+.pro_sec_right_gb{
+    background: linear-gradient(135deg,rgb(0 62 116 / 0%),#36404e00),url(https://s3.us-west-2.amazonaws.com/images.trustpatrick.com/20240118143537/trust_patrick_member.jpg);
+    background-size: cover;
+    background-position: right;
+    min-height: 254px;
+    border-radius: 0.3rem;
+}
+
+.parsley-errors-list > li::before { content: '' !important;  margin: 0px !important;}
+.parsley-errors-list > li { padding-left: 10px !important; margin: 0px !important; }
+
+.parsley-creditcard::after, .parsley-cvv::after, .parsley-equalto::after, .parsley-expirydate::after, .parsley-lowercase::after, .parsley-max::after, .parsley-maxlength::after, .parsley-min::after, .parsley-minlength::after, .parsley-number::after, .parsley-pattern::after, .parsley-required::after, .parsley-special::after, .parsley-type::after, .parsley-uppercase::after { top: -5px !important; }
+
+.ui-menu .ui-menu-item-wrapper { padding: 6px 16px !important; color: #666 !important; font-family: Montserrat, Arial, Helvetica, sans-serif; }
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	border: none !important;
+	background: #eee !important ;
+	font-weight: normal;
+	color: #212121;
+	box-shadow: none !important;
+	margin: 0px !important;
+}
+
+.btn.previous_section {  
+    background-color: #36404e;
+    color: #fff;
+    text-transform: UPPERCASE;
+    border-radius: .6rem;
+    font-weight: 700;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-property: all;
+}
+
+.btn.previous_section:hover
+{
+    transform: scale(1.05,1.05);
+}
+
+.field.field_2 { resize: none !important }
+
+.start_over { font-size: 13px; font-style:  italic; color: #002244; float: right; }
+
+
+/* 19-5-2020 Added */
+body{
+    background-color: transparent;
+    font-size: 17px;
+}
+ul.list_data li{
+    list-style: none;
+}
+
+.fab{
+    font-family: 'Font Awesome 5 Brands' !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring{
+    border: .25em solid #4bd396;
+}
+.swal2-icon.swal2-success .line, .swal2-icon.swal2-success [class^="swal2-success-line"], .swal2-icon.swal2-success [class^="swal2-success-line"][class$="long"]{
+    background-color: #4bd396;
+}
+.swal2-icon.swal2-success [class^="swal2-success-line"]{
+    background-color: #4bd396;
+}
+
+/****Recommended Members Popup*****/
+.rec-comp-header {
+    font-size: 30px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+}
+.rec-comp-sub-header {
+    font-size: 22px;
+    color: #7f8c8d;
+    text-align: center;
+    margin-top: 10px;
+}
+.rec-comp-company-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 7px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 10px; /* Adds spacing between elements */
+    flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+}
+
+/* Company Information Section */
+.rec-comp-company-info {
+    flex-grow: 1;
+    min-width: 200px;
+    max-width: 33%;
+}
+
+/* Company Name */
+.rec-comp-company-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;    
+}
+
+/* Star Rating Section */
+.rec-comp-ratings {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.rec-comp-star-rating {
+    color: gold;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.rec-comp-rating-value {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+
+.rec-comp-company-logo {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8f8;
+    overflow: hidden;
+    border-radius: 8px;
+    text-align: center; /* Ensures text alignment if needed */
+    flex-grow: 1;
+    max-width: 33%;
+}
+
+.rec-comp-company-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+
+/* Checkbox Section */
+.rec-comp-company-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 33%;
+}
+
+.rec-comp-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #164072;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .rec-comp-company-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .rec-comp-company-info {
+        text-align: center;
+    }
+
+    .rec-comp-ratings {
+        justify-content: center;
+    }
+
+    .rec-comp-company-logo {
+        width: 100px;
+        height: 60px;
+        margin-top: 10px;
+    }
+
+    .rec-comp-company-selection {
+        margin-top: 10px;
+    }
+}
+.fullscreen-popup {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    border-radius: 0 !important; /* Remove rounded corners */
+    padding: 20px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }

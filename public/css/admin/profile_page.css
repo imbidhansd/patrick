@@ -1,0 +1,208 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10 Apr, 2020, 3:09:09 PM
+    Author     : ajay
+*/
+
+.content-page{    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    background-color: #f2f2f2;
+}
+
+.content-page .card-box { margin-bottom: 40px; color: #164072; }
+
+
+h1 {  }
+h1 span { border-bottom: 1px solid #164072; padding-bottom: 0px; }
+
+
+.content-page{ padding: 0px !important; margin-top: 0px !important; float: left; width: 100%;  }
+.content-page.no-sidebar { margin-top: 0px !important; }
+
+.dark-blue-bg {
+    background-color: #164072; padding: 40px 0;
+    color: #fff !important;
+}
+
+.white-bg {
+    padding: 40px 0;
+}
+
+/*h3.title { margin-top: 0px; font-size: 22px; font-family: Montserrat, Arial, Helvetica, sans-serif; font-weight: 100 !important; color: #fff !important; }*/
+
+h2.title,
+h3.title,
+h4.title {
+    margin-top: 0px;
+    font-size: 16px;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+    font-weight: 700 !important;
+    color: #003e74 !important;
+}
+
+
+.service_area_list .service_area_item{ color: #164072 !important; background-color: #fff; padding: 8px 16px 8px 0px; margin-bottom: 6px; }
+
+.company_logo {
+    color: #164072 !important;
+    max-width: 250px;
+    min-width: 250px;
+    max-height: 125px;
+    min-height: 125px;
+    margin: 0 auto;
+    position: relative;
+}
+.company_logo p{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.company_logo img{
+    max-width: 250px;
+}
+
+
+.no-border { border: none !important;  }
+.no-background{
+    background: transparent;
+}
+
+.blue-font{
+    color: #164072 !important;
+}
+
+.right-sidebar { text-align: center; }
+
+
+
+.tab-content { background-color: #fff !important; padding: 15px; }
+
+/*.nav-tabs { border-bottom: none !important; }
+.nav-tabs .nav-link { background-color: #ddd; font-family: Montserrat, Arial, Helvetica, sans-serif; font-weight: 100 !important; border-radius: none !important; }
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { border: none; background-color: #164072; color: #fff !important; font-family: Montserrat, Arial, Helvetica, sans-serif; font-weight: 100 !important; border-radius: none !important; }
+*/
+
+
+.nav-pills .nav-link { border-radius: 0px !important; background-color: #eee; font-family: Montserrat, Arial, Helvetica, sans-serif; font-weight: 400 !important; color: #164072 !important; }
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link { background-color: #164072 !important; color: #fff !important; border-radius: none !important; font-family: Montserrat, Arial, Helvetica, sans-serif; font-weight: 400 !important; }
+
+.spe-white-bg { background-color: #fff !important; padding: 40px 0; }
+
+
+.owl-nav { text-align: center; margin-top: 10px;  }
+.owl-next, .owl-prev { width: 30px; height: 30px; background-color: #999 !important; margin: 0 4px; }
+.owl-next span, .owl-prev span { font-size: 22px; line-height: 22px; }
+
+.owl-next:hover, .owl-prev:hover { background-color: #164072 !important;  }
+.owl-next span, .owl-prev span { color: #fff; }
+
+
+.company_name,
+.tagline,
+.company_address,
+.profile_sub_menu ul li,
+.eqHeightItem,
+.service_area_list .service_area_item,
+.cat_name,
+.page-title-box li,
+#service_provided .card-title,
+label,
+p,
+h1,h2,h3,h4,h5,h6,span{
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+.company_name{
+    font-weight: 400 !important;
+    font-size: 34px;
+}
+
+
+
+
+
+
+.tagline{
+    font-weight: 400 !important;
+    font-size: 18px;
+    color: #ff0000;
+}
+.tagline.blue{
+    font-weight: 400 !important;
+    font-size: 18px;
+    color: #164072;
+    line-height: 28px;
+}
+.company_address{
+    font-size: 16px;
+}
+.zipcode_item{
+    background: #fff;
+}
+
+.dd-list .dd-item .dd-handle {
+    padding: 8px 12px;
+    background: #f3f3f3;
+}
+
+
+.minHeight{
+    min-height: 360px;
+}
+
+.breadcrumb-item, .breadcrumb-item a, .breadcrumb-item.active { font-size: 10px; color:#002244  }
+.pt-50px { padding-top: 50px; }
+
+.profile_sub_menu a, #company_address_display a { color: #164072 !important; }
+.profile_sub_menu a:hover, #company_address_display a:hover { color: #188ae2 !important; }
+
+.avg_rating { font-weight: 400 !important; font-size: 14px; }
+.yellow-star { color: #FDD901 !important; }
+.starHalf { max-width: 160px; display: inline-block; margin: 0 auto; }
+/*.starHalf .fas { font-size: 23px !important; }*/
+
+.starHalf .fas,
+.starHalf .far { font-size: 23px !important; }
+
+.xs-visible{
+    display: none;
+}
+
+@media (max-width: 767px) {
+    /*.content-page.no-sidebar{
+        margin-top: 50px !important;
+    }*/
+
+    .profile_sub_menu{
+        text-align: center;
+    }
+    .profile_sub_menu ul li{
+        margin: 10px;
+    }
+    .pt-50px { padding-top: 30px !important; }
+}
+
+@media only screen and (max-width: 575px) {
+    .xs-hidden{
+        display: none;
+    }
+    .xs-visible{
+        display: table-row;
+    }
+}
+
+@media (max-width: 360px) {
+    .nav-pills .nav-link{
+        font-size: 11px;
+        padding: 8px;
+    }
+}

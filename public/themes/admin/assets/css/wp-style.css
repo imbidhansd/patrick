@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap');
+
+/*
+font-family: 'Montserrat', sans-serif;
+*/
+
+
+body{ padding:0; margin:0; font-size:12px; color:#000; font-family: 'Montserrat', sans-serif;}
+a {outline:none !important; text-decoration:none;
+-webkit-transition: all .6s ease-in-out; -moz-transition: all .6s ease-in-out; -o-transition: all .6s ease-in-out; -ms-transition: all .6s ease-in-out; transition:all .6s ease-in-out;}
+a:hover, a:focus, select:focus, button:focus { outline:none; text-decoration:none;}
+* { margin:0; padding:0;}
+img { border:none; vertical-align:middle; max-width:100%;}
+li{ list-style:none;}
+h1, h2, h3, h4, h5, h6, input, select, textarea, button{ outline:none !important;}
+input, textarea, select{ /*-moz-appearance: none; -webkit-appearance: none;*/}
+
+.container{ width:96%; max-width:1190px; margin:0 auto; padding:0;}
+
+/***********  Top Part  ************/
+header{ width:100%; float:left; margin:0px; padding:0px;}
+
+.nav_sec{ width:100%; float:left; margin:0px; padding:0px; box-shadow: 0px 21px 16px rgba(0,0,0,0.1); background:#fff;}
+.nav_sec .navbar-default{ background:none; border:none; margin:0; min-height:inherit;}
+.nav_sec .navbar-brand{ margin:24px 0 0 0; padding:0; height:inherit;}
+.nav_sec .navbar-nav{ float:right; margin:0;}
+.nav_sec .navbar-default .navbar-nav > li{ margin:0 0 0 32px;}
+.nav_sec .navbar-default .navbar-nav > li > a{ margin:0; padding:40px 0; font-size:14px; color:#002244; font-weight:700; position: relative;}
+.nav_sec .navbar-default .navbar-nav > li > a:after{ top: 100%; left:50%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; border-color: rgba(255, 255, 255, 0); border-top-color: #fff; border-width: 12px; margin-left:-12px; opacity:0; transition:all .6s ease-in-out;}
+.nav_sec .navbar-default .navbar-nav > li > a:hover, .nav_sec .navbar-default .navbar-nav > li > a:focus, .nav_sec .navbar-default .navbar-nav > .active > a, .nav_sec .navbar-default .navbar-nav > .active > a:hover, .nav_sec .navbar-default .navbar-nav > .active > a:focus, .nav_sec .navbar-default .navbar-nav > .open > a, .nav_sec .navbar-default .navbar-nav > .open > a:hover, .nav_sec .navbar-default .navbar-nav > .open > a:focus{ color:#1e73be; background:none;}
+
+.nav_sec .navbar-default .navbar-nav > li > a:hover:after, .nav_sec .navbar-default .navbar-nav > li > a:focus:after, .nav_sec .navbar-default .navbar-nav > .active > a:after, .nav_sec .navbar-default .navbar-nav > .active > a:hover:after, .nav_sec .navbar-default .navbar-nav > .active > a:focus:after, .nav_sec .navbar-default .navbar-nav > .open > a:after, .nav_sec .navbar-default .navbar-nav > .open > a:hover:after, .nav_sec .navbar-default .navbar-nav > .open > a:focus:after{ opacity:1;}
+
+.nav_sec .navbar-default .navbar-nav > li:last-child > a:after{ display:none;}
+
+.nav_sec .navbar-nav > li > .dropdown-menu{ border:none; margin-top: 35px; min-width:100%; background:#f2f2f2; padding:0; box-shadow:1px 1px 30px rgba(0,0,0,.06);}
+.nav_sec .dropdown-menu:after{ bottom: 100%; left:20px; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; border-color: rgba(255, 255, 255, 0); border-bottom-color: #f2f2f2; border-width: 12px; margin-left:0;}
+.nav_sec .dropdown-menu > li > a{ padding:10px 20px; font-size: 14px; color:#0c4d89; font-weight:400;}
+.nav_sec .dropdown-menu > li > a:hover, .nav_sec .dropdown-menu > li > a:focus{ background:#fff; color:#1e73be;}
+
+.nav_sec .navbar-default .navbar-nav > li > a.other_link{ margin-top:34px; padding:9px 20px; font-weight:400; border-radius: 2px; background: #164072; color:#fff; text-transform:uppercase; font-size:12px; line-height:14px;}
+.nav_sec .navbar-default .navbar-nav > li > a.other_link:hover, .nav_sec .navbar-default .navbar-nav > li > a.other_link:focus, .nav_sec .navbar-default .navbar-nav > .active > a.other_link, .nav_sec .navbar-default .navbar-nav > .active > a.other_link:hover, .nav_sec .navbar-default .navbar-nav > .active > a.other_link:focus, .nav_sec .navbar-default .navbar-nav > .open > a.other_link, .nav_sec .navbar-default .navbar-nav > .open > a.other_link:hover, .nav_sec .navbar-default .navbar-nav > .open > a.other_link:focus{ background:#1e73be; color:#fff;}
+
+/*********** Footer ************/
+.footer_sec{ width:100%; float:left; margin:0; padding:43px 0 40px 0; background:#363839; text-align:center;}
+.footer_sec .br{ border-right:1px solid #505152; min-height:357px;}
+.footer_sec h4{ margin:0 0 28px 0; padding:0; font-size: 13px; font-weight: 400; line-height: 1.5; letter-spacing: 0px; font-style: normal; color:#dddddd; text-transform:uppercase;}
+.footer_sec p{ margin:0 0 70px 0; padding:0; font-size:14px; color: #8c8989;}
+.footer_sec p.mb-0{ margin-bottom:0;}
+.more_link{ margin:0; padding:0; display:inline-table; margin:0; padding:9px 20px; font-size:12px; background:#164072; color:#fff; text-align:center; text-transform:uppercase; line-height:14px; border-radius:3px;}
+.more_link:hover{ background:#1e73be; color:#fff;}
+
+.social_link{ width:100%; display:inline-block; margin:0; padding:0; text-align:center;}
+.social_link li{ display:inline-block; margin:0 5px 0 5px; padding:0; font-size:18px;}
+.social_link li a{ color:#bebdbd;}
+.social_link li a:hover{ color:#1e73be;}
+
+.add_info{ width:100%; display:inline-block; margin:0; padding:0; text-align:center; font-size:14px; color: #8c8989;}
+
+.footer_links{ width:100%; display:inline-block; margin:0 0 50px 0; padding:0; text-align:left;}
+.footer_links li{ display:block; margin:0; padding:0; font-size:14px; position:relative;}
+.footer_links li:before{ content:"\f105"; font-family:'FontAwesome'; color: #dddddd; position:absolute; left:10px; top:8px;}
+.footer_links li a{ display:block; color:#bebdbd; padding:10px 10px 10px 24px; color: #dddddd; border-bottom:1px solid #505152;}
+.footer_links li a:hover{ color:#1e73be;}
+
+.copyright{ width:100%; float:left; margin:0; padding:18px 0 16px 0; border-top: 1px solid #4b4c4d; font-size:13px; color:#fff; background:#282a2b; text-align:center;}
+.copyright a{ color:#fff;}
+.copyright a:hover{ color:#1e73be;}

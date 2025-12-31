@@ -1,0 +1,121 @@
+.parsley-creditcard,
+.parsley-custom-error-message,
+.parsley-cvv,
+.parsley-equalto,
+.parsley-equalto li,
+.parsley-expirydate,
+.parsley-lowercase,
+.parsley-maxlength,
+.parsley-maxlength li,
+.parsley-minlength,
+.parsley-minlength li,
+.parsley-number,
+.parsley-pattern,
+.parsley-pattern li,
+.parsley-required,
+.parsley-required li,
+.parsley-special,
+.parsley-type,
+.parsley-type li,
+.parsley-uppercase,
+li.parsley-max,
+li.parsley-min {
+	color: #fff!important
+}
+
+.parsley-custom-error-message,
+.parsley-creditcard,
+.parsley-cvv,
+.parsley-expirydate,
+.parsley-lowercase,
+.parsley-number,
+.parsley-special,
+.parsley-success .parsley-equalto,
+.parsley-success .parsley-pattern,
+.parsley-success .parsley-required,
+.parsley-success .parsley-type,
+.parsley-uppercase {
+	display: none!important
+}
+
+.parsley-errors-list {
+	padding-left: 0;
+	margin-bottom: 0!important;
+	clear: both
+}
+
+.parsley-custom-error-message,
+.parsley-creditcard,
+.parsley-cvv,
+.parsley-equalto,
+.parsley-expirydate,
+.parsley-lowercase,
+.parsley-max,
+.parsley-maxlength,
+.parsley-min,
+.parsley-minlength,
+.parsley-number,
+.parsley-pattern,
+.parsley-required,
+.parsley-special,
+.parsley-type,
+.parsley-uppercase {
+	background: padding-box red;
+	border-radius: 4px;
+	display: inline-block!important;
+	font-size: 12px;
+	font-weight: 600;
+	list-style: none;
+	margin: 0;
+	padding: 2px 10px;
+	position: absolute;
+	z-index: 999
+}
+
+.parsley-custom-error-message::after,
+.parsley-creditcard::after,
+.parsley-cvv::after,
+.parsley-equalto::after,
+.parsley-expirydate::after,
+.parsley-lowercase::after,
+.parsley-max::after,
+.parsley-maxlength::after,
+.parsley-min::after,
+.parsley-minlength::after,
+.parsley-number::after,
+.parsley-pattern::after,
+.parsley-required::after,
+.parsley-special::after,
+.parsley-type::after,
+.parsley-uppercase::after {
+	border-bottom: 6px solid red;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	content: "";
+	display: inline-block;
+	left: 3px;
+	position: absolute;
+	top: -6px
+}
+
+span.error {
+	margin-left: 15px
+}
+
+.howl {
+	background: padding-box #353535;
+	border: 1px solid #111;
+	border-radius: 4px;
+	list-style: none;
+	padding: 0
+}
+
+.parsley-lowercase,
+.parsley-number,
+.parsley-special,
+.parsley-uppercase {
+	width: 90%
+}
+
+
+.parsley-errors-list li{ font-size: 11px !important; }
