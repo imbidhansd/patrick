@@ -23,6 +23,7 @@ use App\Models\State;
 use App\Models\TopLevelCategory;
 use App\Models\TopLevelCategoryTrade;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
 use Str;
@@ -35,9 +36,9 @@ class AffiliateLeadController extends Controller
 {
     public function ProcessAffiliateMemberRequest(Request $request)
     {
-        $correlationId = Str::uuid()->toString();             
+        $correlationId = Str::uuid()->toString();
         try
-        {    
+        {
             Log::channel('custom_db')->info('Processing started for member lead', [
                 'data' => $request->json()->all(),
                 'key_identifier' =>  $correlationId,
@@ -56,8 +57,8 @@ class AffiliateLeadController extends Controller
             $data["state"] = $request->state;
             $data["phone"] = $request->phone;
             $data["service_category_type_id"] = isset($request->service_type_id) && isset($request->service_type_id[0])  ? $request->service_type_id[0] : null;
-            $data["main_category_id"] = isset($request->main_category_id) && isset($request->main_category_id[0])  ? $request->main_category_id[0] : null; 
-            $data["service_category_id"] = isset($request->category_id) && isset($request->category_id[0])  ? $request->category_id[0] : null; 
+            $data["main_category_id"] = isset($request->main_category_id) && isset($request->main_category_id[0])  ? $request->main_category_id[0] : null;
+            $data["service_category_id"] = isset($request->category_id) && isset($request->category_id[0])  ? $request->category_id[0] : null;
             $data["project_address"] = $request->address;
             $data["timeframe"] = isset($request->timeframe) && isset($request->timeframe[0])  ? self::GetTimeframe($request->timeframe[0]) : null;
             $data["zipcode"] = $request->zip;
@@ -81,13 +82,13 @@ class AffiliateLeadController extends Controller
                 'main_category_id' => 'required',
                 'service_category_id' => 'required',
                 'project_address' => 'required',
-                'timeframe' => 'required', 
+                'timeframe' => 'required',
                 'zipcode' => 'required',
                 'content' => 'required',
                 'api_key' => 'required'
                 //'lead_terms' => 'required',
                 //'g-recaptcha-response' => ['required', new ValidRecaptcha]
-            ]);            
+            ]);
 
             if (isset($validator) && $validator->fails()) {
                 $validation_message = $validator->messages()->getMessages();
@@ -102,7 +103,7 @@ class AffiliateLeadController extends Controller
                     'message' => $validation_message,
                     'correlationid' => $correlationId
                 ];
-            }        
+            }
 
             $affiliate = Affiliate::where('api_key', '=',  $data["api_key"] )->first();
 
@@ -111,7 +112,7 @@ class AffiliateLeadController extends Controller
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::MemberLead
             ]);
-            
+
             if (is_null($affiliate)) {
                 Log::channel('custom_db')->warning('Invalid API Key', [
                     'key_identifier' =>  $correlationId,
@@ -126,9 +127,9 @@ class AffiliateLeadController extends Controller
 
             $data["affiliate_id"] = $affiliate->id;
             $mainTlc = MainCategoryTopLevelCategory::where('main_category_id', $data["main_category_id"])->first();
-            $data['top_level_category_id'] = $mainTlc->top_level_category_id;   
+            $data['top_level_category_id'] = $mainTlc->top_level_category_id;
             $topLevelCategoryTrade = TopLevelCategoryTrade::where('top_level_category_id', $data['top_level_category_id'])->first();
-            $data['trade_id'] = $topLevelCategoryTrade->trade_id;   
+            $data['trade_id'] = $topLevelCategoryTrade->trade_id;
 
             if (is_null($mainTlc) || is_null($topLevelCategoryTrade)) {
                 Log::channel('custom_db')->warning('Bad request[Service]', [
@@ -158,7 +159,7 @@ class AffiliateLeadController extends Controller
                             'companies.status',
                             'm.file_name as logo',
                             's.short_name as state_code',
-                            's.name as state_name' 
+                            's.name as state_name'
                         )
                         ->leftJoin('membership_levels AS ml', 'companies.membership_level_id', 'ml.id')
                         ->leftJoin('states as s', 'companies.state_id', 's.id')
@@ -169,7 +170,7 @@ class AffiliateLeadController extends Controller
                 'data' => $company,
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::MemberLead
-            ]);            
+            ]);
 
             if (is_null($company)) {
                 Log::channel('custom_db')->warning('Bad request[Member]', [
@@ -213,8 +214,8 @@ class AffiliateLeadController extends Controller
             //check for test zipcodes
             $testValuesToBeProcessed = explode(',', env('TEST_ZIPCODES_TOBEPROCESSED'));
             $testValuesToBeProcessedExceptNetworx = explode(',', env('TEST_ZIPCODES_TOBEPROCESSED_EXCEPT_NETWORX'));
-            if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx)) 
-            if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx)) 
+            if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx))
+            if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx))
             {
                 //some default city and state
                 $data['city'] = "NA";
@@ -230,19 +231,19 @@ class AffiliateLeadController extends Controller
                     ['company_id', $company->id],
                     ['zip_code', $data["zipcode"]]
                 ])->active()->first();
-    
+
                 Log::channel('custom_db')->info('Company Zipcode Information', [
                     'data' => $company_zipcodes,
                     'key_identifier' =>  $correlationId,
                     'key_identifier_type' => KeyIdentifierType::MemberLead
-                ]);           
-    
+                ]);
+
                 if (is_null($company_zipcodes)) {
                     Log::channel('custom_db')->info('Company not working in the selected service area.', [
                         'key_identifier' =>  $correlationId,
                         'key_identifier_type' => KeyIdentifierType::MemberLead
                     ]);
-    
+
                     return [
                         'success' => 0,
                         'message' => 'Company not working in the selected service area.',
@@ -252,7 +253,7 @@ class AffiliateLeadController extends Controller
                 $data["state_id"] =  $company_zipcodes->state_id;
                 $data["city"] = $company_zipcodes->city;
             }
-            
+
 
             $lead = Lead::create($data);
             Log::channel('custom_db')->info('Lead created', [
@@ -264,7 +265,7 @@ class AffiliateLeadController extends Controller
             Custom::lead_confirmation_email($lead);
 
             //Parse aweber
-            if (isset($affiliate) && $affiliate->aweber_enabled) {            
+            if (isset($affiliate) && $affiliate->aweber_enabled) {
                 $mainCategory = MainCategory::where('id', $data['main_category_id'])->first();
                 $company_logo = empty($company->logo) ? self::getTempLogo($company->company_name,$company->slug) :  env('APP_URL') . "/uploads/media/{$company->logo}";
                 $customFields = [
@@ -277,13 +278,13 @@ class AffiliateLeadController extends Controller
                     'company_phone_1' => $company->main_company_telephone,
                     'company_name_1' => $company->company_name
                 ];
-                
-                $aweberSubscribeListRequest = [ 
+
+                $aweberSubscribeListRequest = [
                     "name" => $lead->full_name,
-                    "email" => $lead->email, 
+                    "email" => $lead->email,
                     "custom_fields" => $customFields
-                ];                
-               
+                ];
+
                 $domainAbbr = strtolower($affiliate->domain_abbr);
                 $listname = $affiliate->aweber_member_list;
                 Log::channel('custom_db')->info('Aweber subscribe request', [
@@ -296,13 +297,13 @@ class AffiliateLeadController extends Controller
                 $subscribeListResponse = Aweber::SubscribeToList($affiliate->aweber_account_id,
                     $listname,
                     $affiliate->aweber_refresh_token,
-                    $aweberSubscribeListRequest);                
+                    $aweberSubscribeListRequest);
                 Log::channel('custom_db')->info('Aweber subscribe response', [
                     'data' => $subscribeListResponse,
                     'listname' => $listname,
                     'key_identifier' =>  $correlationId,
                     'key_identifier_type' => KeyIdentifierType::MemberLead
-                ]);           
+                ]);
             }
 
             $company_lead_request = [
@@ -310,7 +311,7 @@ class AffiliateLeadController extends Controller
                 'lead_id' => $lead->id,
                 'is_hidden' => $company->membership_level->hide_leads,
                 'priority' => '1'
-            ];            
+            ];
 
             $company_lead = CompanyLead::create($company_lead_request);
             Log::debug("{$correlationId} Company lead created");
@@ -328,14 +329,14 @@ class AffiliateLeadController extends Controller
             Log::channel('custom_db')->info('Lead processed sucessfully',[
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::MemberLead
-            ]);  
+            ]);
             return [
-                'success' => 1,          
+                'success' => 1,
                 'message' => "Lead processed sucessfully",
                 'correlationid' => $correlationId
             ];
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             Log::channel('custom_db')->error('Error processing member lead request',[
                 'data' => $request->json()->all(),
@@ -343,14 +344,14 @@ class AffiliateLeadController extends Controller
                 'exception_trace' => $e->getTraceAsString(),
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::MemberLead
-            ]);  
-                       
+            ]);
+
             return [
-                'success' => 0,          
+                'success' => 0,
                 'message' => "Exception while processing lead".$e->getMessage()."Trace:".$e->getTraceAsString(),
                 'correlationid' => $correlationId
             ];
-        }        
+        }
     }
 
     public function ProcessAffiliateGeneralRequest(Request $request)
@@ -371,8 +372,8 @@ class AffiliateLeadController extends Controller
         $data["email"] = $request->email;
         $data["phone"] = $request->phone;
         $data["service_category_type_id"] = isset($request->service_type_id) ? $request->service_type_id : null;
-        $data["main_category_id"] = isset($request->main_category_id) ? $request->main_category_id : null; 
-        $data["service_category_id"] = isset($request->category_id) ? $request->category_id : null; 
+        $data["main_category_id"] = isset($request->main_category_id) ? $request->main_category_id : null;
+        $data["service_category_id"] = isset($request->category_id) ? $request->category_id : null;
         $data["project_address"] = $request->address;
         $data["timeframe"] = isset($request->timeframe)  ? self::GetTimeframe($request->timeframe) : null;
         $data["zipcode"] = $request->zip;
@@ -395,7 +396,7 @@ class AffiliateLeadController extends Controller
             'main_category_id' => 'required',
             'service_category_id' => 'required',
             'project_address' => 'required',
-            'timeframe' => 'required', 
+            'timeframe' => 'required',
             'zipcode' => 'required',
             'content' => 'required',
             'api_key' => 'required'
@@ -414,13 +415,13 @@ class AffiliateLeadController extends Controller
                 'message' =>$validation_message,
                 'correlationid' => $correlationId
             ];
-        }  
+        }
         Log::channel('custom_db')->warning("Creating general request job", [
             'data' => $data,
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
         ]);
-        ProcessGeneralRequestJob::dispatch($data);  
+        ProcessGeneralRequestJob::dispatch($data);
         return [
             'success' =>1,
             'message' => 'ProcessGeneralRequestJob job created.',
@@ -453,13 +454,14 @@ class AffiliateLeadController extends Controller
         $data["email"] = $request->email;
         $data["phone"] = $request->phone;
         $data["service_category_type_id"] = isset($request->service_type_id) ? $request->service_type_id : null;
-        $data["main_category_id"] = isset($request->main_category_id) ? $request->main_category_id : null; 
-        $data["service_category_id"] = isset($request->category_id) ? $request->category_id : null; 
+        $data["main_category_id"] = isset($request->main_category_id) ? $request->main_category_id : null;
+        $data["service_category_id"] = isset($request->category_id) ? $request->category_id : null;
         $data["project_address"] = $request->address;
         $data["timeframe"] = isset($request->timeframe)  ? self::GetTimeframe($request->timeframe) : null;
         $data["zipcode"] = $request->zip;
         $data["content"] = $request->project_info;
         $data["signup_url"] = $request->signup_url;
+        $data["homeowner_id"] =  $request->homeowner_id;
         $data["api_key"] = $request->header('apikey');
         $data["cert_url"] =  $request->cert_url;
 
@@ -477,7 +479,7 @@ class AffiliateLeadController extends Controller
             'main_category_id' => 'required',
             'service_category_id' => 'required',
             'project_address' => 'required',
-            'timeframe' => 'required', 
+            'timeframe' => 'required',
             'zipcode' => 'required',
             'content' => 'required',
             'api_key' => 'required'
@@ -497,21 +499,21 @@ class AffiliateLeadController extends Controller
                 'correlationid' => $correlationId
             ];
         }
-        
+
         /*API key check - START*/
         $affiliate = Affiliate::where('api_key', '=',  $data["api_key"] )->first();
         Log::channel('custom_db')->info('Affiliate Information', [
             'data' => $affiliate,
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
-        ]);          
+        ]);
 
         if (is_null($affiliate)) {
             Log::channel('custom_db')->warning('Invalid API Key', [
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::GeneralLead
             ]);
-            
+
             return [
                 'success' => 0,
                 'message' => 'Invalid API Key.',
@@ -521,9 +523,9 @@ class AffiliateLeadController extends Controller
         $data["affiliate_id"] = $affiliate->id;
         /*API key check - END*/
 
-        /**Main Category Id check - START*/ 
+        /**Main Category Id check - START*/
         $mainTlc = MainCategoryTopLevelCategory::where('main_category_id', $data["main_category_id"])->first();
-        
+
         if (is_null($mainTlc)) {
             Log::channel('custom_db')->warning('Bad request[Service main_category_id]', [
                 'key_identifier' =>  $correlationId,
@@ -539,15 +541,15 @@ class AffiliateLeadController extends Controller
         /**Main Category Id check - END*/
 
         /**Top Level Category Id check - START*/
-        $data['top_level_category_id'] = $mainTlc->top_level_category_id;   
+        $data['top_level_category_id'] = $mainTlc->top_level_category_id;
         $topLevelCategoryTrade = TopLevelCategoryTrade::where('top_level_category_id', $data['top_level_category_id'])->first();
-        
+
         if (is_null($topLevelCategoryTrade)) {
             Log::channel('custom_db')->warning('Bad request[top_level_category_id]', [
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::GeneralLead
             ]);
-            
+
             return [
                 'success' => 0,
                 'message' => 'Bad request[top_level_category_id].',
@@ -555,11 +557,11 @@ class AffiliateLeadController extends Controller
             ];
         }
         /**Top Level Category Id check - END*/
-        $data['trade_id'] = $topLevelCategoryTrade->trade_id;   
+        $data['trade_id'] = $topLevelCategoryTrade->trade_id;
         /**ZipCode validation - START */
         $testValuesToBeProcessed = explode(',', env('TEST_ZIPCODES_TOBEPROCESSED'));
         $testValuesToBeProcessedExceptNetworx = explode(',', env('TEST_ZIPCODES_TOBEPROCESSED_EXCEPT_NETWORX'));
-        if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx)) 
+        if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx))
         {
             //some default city and state
             $data['city'] = "NA";
@@ -574,7 +576,7 @@ class AffiliateLeadController extends Controller
             //get state info by zipcode
             $APIkey = env('ZIPCODE_API_KEY');
             $json = @file_get_contents('https://www.zipcodeapi.com/rest/' . $APIkey . '/info.json/' . $data["zipcode"] . '/radians');
-                
+
             if ($json != '') {
                 $zipcodeArr = json_decode($json);
                 $stateObj = State::where('short_name', $zipcodeArr->state)->first();
@@ -616,7 +618,7 @@ class AffiliateLeadController extends Controller
             'data' => $lead_counter,
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
-        ]);       
+        ]);
 
         $web_settings = Custom::getSettings();
         $networxEnabled = isset($web_settings['sent_to_networx']) && $web_settings['sent_to_networx'] == 'yes';
@@ -636,7 +638,7 @@ class AffiliateLeadController extends Controller
             'data' => $generalData,
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
-        ]);           
+        ]);
         $networx_processed = false;
         $networx_status_code =  null;
         $networx_redirect_url =  null;
@@ -645,8 +647,8 @@ class AffiliateLeadController extends Controller
             $filteredOfficialCompaniesCount <= 0
         ) {
             $testValuesToBeProcessedExceptNetworx = explode(',', env('TEST_ZIPCODES_TOBEPROCESSED_EXCEPT_NETWORX'));
-            if (in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx)) 
-            {                    
+            if (in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx))
+            {
                 Log::channel('custom_db')->info('Skipping networx with test zipcode', [
                     'key_identifier' =>  $correlationId,
                     'key_identifier_type' => KeyIdentifierType::GeneralLead
@@ -655,7 +657,7 @@ class AffiliateLeadController extends Controller
             else
             {
                 $networx_response = Custom::networxCall($lead);
-                $networx_processed = true;                
+                $networx_processed = true;
                 Log::channel('custom_db')->info('Networx response', [
                     'data' => $networx_response,
                     'key_identifier' =>  $correlationId,
@@ -663,12 +665,12 @@ class AffiliateLeadController extends Controller
                 ]);
                 $networx_status_code = $networx_response['statusCode'];
                 if ($networx_response['statusCode'] == '200') {
-                    $networx_redirect_url = urldecode((string)$networx_response['redirectUrl']); 
-                    $lead->networx_redirect_url = $networx_redirect_url;                   
+                    $networx_redirect_url = urldecode((string)$networx_response['redirectUrl']);
+                    $lead->networx_redirect_url = $networx_redirect_url;
                 }
-                else if(in_array($data["zipcode"], $testValuesToBeProcessed) && $networx_response['statusCode'] != '200'){ //override networx dummy response if requested with 00001                     
+                else if(in_array($data["zipcode"], $testValuesToBeProcessed) && $networx_response['statusCode'] != '200'){ //override networx dummy response if requested with 00001
                     $networx_status_code = 200;
-                    $networx_redirect_url = urldecode("https%3A%2F%2Fwww.networx.com%2Flead-confirmation%3Fid%3D123465%26aff_token%3D91jcbjwdvchjr5%26utm_source%3D12345%26utm_medium%3Daffiliate"); 
+                    $networx_redirect_url = urldecode("https%3A%2F%2Fwww.networx.com%2Flead-confirmation%3Fid%3D123465%26aff_token%3D91jcbjwdvchjr5%26utm_source%3D12345%26utm_medium%3Daffiliate");
                     $lead->networx_redirect_url = $networx_redirect_url;
                 }
 
@@ -683,7 +685,7 @@ class AffiliateLeadController extends Controller
             'key_identifier_type' => KeyIdentifierType::GeneralLead
         ]);
 
-        ProcessGeneralRequestJobv1::dispatch($lead);  
+        ProcessGeneralRequestJobv1::dispatch($lead);
         $v1_response = [
             'success' =>1,
             'message' => 'ProcessGeneralRequestJobV1 job created.',
@@ -730,15 +732,16 @@ class AffiliateLeadController extends Controller
         $data["email"] = $request->email;
         $data["phone"] = $request->phone;
         $data["service_category_type_id"] = isset($request->service_type_id) ? $request->service_type_id : null;
-        $data["main_category_id"] = isset($request->main_category_id) ? $request->main_category_id : null; 
-        $data["service_category_id"] = isset($request->category_id) ? $request->category_id : null; 
+        $data["main_category_id"] = isset($request->main_category_id) ? $request->main_category_id : null;
+        $data["service_category_id"] = isset($request->category_id) ? $request->category_id : null;
         $data["project_address"] = $request->address;
         $data["timeframe"] = isset($request->timeframe)  ? self::GetTimeframe($request->timeframe) : null;
         $data["zipcode"] = $request->zip;
         $data["content"] = $request->project_info;
         $data["signup_url"] = $request->signup_url;
         $data["api_key"] = $request->header('apikey');
-        $data["cert_url"] =  $request->cert_url; 
+        $data["cert_url"] =  $request->cert_url;
+        $data["homeowner_id"] =  $request->homeowner_id;
         $data['company_slugs_csv'] = $request->input('member_slugs', '');
         Log::channel('custom_db')->info('Lead data mapped', [
             'data' => $data,
@@ -754,7 +757,7 @@ class AffiliateLeadController extends Controller
             'main_category_id' => 'required',
             'service_category_id' => 'required',
             'project_address' => 'required',
-            'timeframe' => 'required', 
+            'timeframe' => 'required',
             'zipcode' => 'required',
             'content' => 'required',
             'api_key' => 'required'
@@ -774,21 +777,21 @@ class AffiliateLeadController extends Controller
                 'correlationid' => $correlationId
             ];
         }
-        
+
         /*API key check - START*/
         $affiliate = Affiliate::where('api_key', '=',  $data["api_key"] )->first();
         Log::channel('custom_db')->info('Affiliate Information', [
             'data' => $affiliate,
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
-        ]);          
+        ]);
 
         if (is_null($affiliate)) {
             Log::channel('custom_db')->warning('Invalid API Key', [
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::GeneralLead
             ]);
-            
+
             return [
                 'success' => 0,
                 'message' => 'Invalid API Key.',
@@ -798,9 +801,9 @@ class AffiliateLeadController extends Controller
         $data["affiliate_id"] = $affiliate->id;
         /*API key check - END*/
 
-        /**Main Category Id check - START*/ 
+        /**Main Category Id check - START*/
         $mainTlc = MainCategoryTopLevelCategory::where('main_category_id', $data["main_category_id"])->first();
-        
+
         if (is_null($mainTlc)) {
             Log::channel('custom_db')->warning('Bad request[Service main_category_id]', [
                 'key_identifier' =>  $correlationId,
@@ -816,15 +819,15 @@ class AffiliateLeadController extends Controller
         /**Main Category Id check - END*/
 
         /**Top Level Category Id check - START*/
-        $data['top_level_category_id'] = $mainTlc->top_level_category_id;   
+        $data['top_level_category_id'] = $mainTlc->top_level_category_id;
         $topLevelCategoryTrade = TopLevelCategoryTrade::where('top_level_category_id', $data['top_level_category_id'])->first();
-        
+
         if (is_null($topLevelCategoryTrade)) {
             Log::channel('custom_db')->warning('Bad request[top_level_category_id]', [
                 'key_identifier' =>  $correlationId,
                 'key_identifier_type' => KeyIdentifierType::GeneralLead
             ]);
-            
+
             return [
                 'success' => 0,
                 'message' => 'Bad request[top_level_category_id].',
@@ -832,11 +835,11 @@ class AffiliateLeadController extends Controller
             ];
         }
         /**Top Level Category Id check - END*/
-        $data['trade_id'] = $topLevelCategoryTrade->trade_id;   
+        $data['trade_id'] = $topLevelCategoryTrade->trade_id;
         /**ZipCode validation - START */
         $testValuesToBeProcessed = explode(',', env('TEST_ZIPCODES_TOBEPROCESSED'));
         $testValuesToBeProcessedExceptNetworx = explode(',', env('TEST_ZIPCODES_TOBEPROCESSED_EXCEPT_NETWORX'));
-        if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx)) 
+        if (in_array($data["zipcode"], $testValuesToBeProcessed) || in_array($data["zipcode"], $testValuesToBeProcessedExceptNetworx))
         {
             //some default city and state
             $data['city'] = "NA";
@@ -851,7 +854,7 @@ class AffiliateLeadController extends Controller
             //get state info by zipcode
             $APIkey = env('ZIPCODE_API_KEY');
             $json = @file_get_contents('https://www.zipcodeapi.com/rest/' . $APIkey . '/info.json/' . $data["zipcode"] . '/radians');
-                
+
             if ($json != '') {
                 $zipcodeArr = json_decode($json);
                 $stateObj = State::where('short_name', $zipcodeArr->state)->first();
@@ -871,7 +874,7 @@ class AffiliateLeadController extends Controller
             }
         }
         /**ZipCode validation - END */
-       
+
         /**Generate Lead - START */
         $lead = Lead::create($data);
         Log::channel('custom_db')->info('Lead created', [
@@ -879,17 +882,17 @@ class AffiliateLeadController extends Controller
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
         ]);
-                
+
         Log::channel('custom_db')->warning("Creating general request by company slug job", [
             'data' => $lead,
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
         ]);
 
-        ProcessGeneralRequestJobv1::dispatch($lead);  
+        ProcessGeneralRequestJobv1::dispatch($lead);
         $v1_response = [
             'success' =>1,
-            'message' => 'ProcessAffliateGeneralRequestByCompanySlugJob job created.',            
+            'message' => 'ProcessAffliateGeneralRequestByCompanySlugJob job created.',
             'correlationid' => $correlationId
         ];
 
@@ -901,17 +904,17 @@ class AffiliateLeadController extends Controller
 
         return  $v1_response;
     }
-    
+
     public function ProcessExternalRequest(Request $request)
     {
-        //Add captcha validation 
+        //Add captcha validation
 
         // Clone existing request
         $newRequest = Request::createFrom($request);
 
         // Add or override the apikey header
         $newRequest->headers->set('apikey', 'ND1XFA3XFLTKAQO785HFP4FBK2BSLK0Y');
-       
+
        //return $this->ProcessAffiliateGeneralRequestv1($newRequest);
 
        $v1_response = [
@@ -928,7 +931,7 @@ class AffiliateLeadController extends Controller
 
     public function store(Request $request)
     {
-        try {            
+        try {
             $categoryIdCode = $request->category_id;
             $timeframe = self::GetTimeframe($request->selectTimeframe);
             $request->offsetSet('full_name', $request->txtFirstName . ' ' . $request->txtLastName);
@@ -1025,7 +1028,7 @@ class AffiliateLeadController extends Controller
             $request->request->remove('txtAreaProject');
             $request->request->remove('certUrl');
 
-            if (count($request->all())) {                
+            if (count($request->all())) {
                 $lead = Lead::create($requestData);
                 Log::debug("Lead created successfully");
                 Log::debug(json_encode($lead));
@@ -1047,7 +1050,7 @@ class AffiliateLeadController extends Controller
                 $affiliate_aweber_enabled = $affiliate->aweber_enabled;
 
                 if (isset($affiliate) && $affiliate->aweber_enabled) {
-                    $affiliateMainCategory = AffiliateMainCategory::where(['affiliate_id' => $affiliate->id, 'main_category_id' => $mainCategory->id])->first();                    
+                    $affiliateMainCategory = AffiliateMainCategory::where(['affiliate_id' => $affiliate->id, 'main_category_id' => $mainCategory->id])->first();
                     Log::debug("Affiliate Top Level Category");
                     Log::debug(json_encode($affiliateMainCategory ));
                     if(isset($affiliateMainCategory))
@@ -1057,10 +1060,10 @@ class AffiliateLeadController extends Controller
                             'memberurl' => '',
                             'signupurl' => $lead->signup_url,
                         ];
-                        
-                        $aweberSubscribeListRequest = [ 
+
+                        $aweberSubscribeListRequest = [
                             "name" => $lead->full_name,
-                            "email" => $lead->email, 
+                            "email" => $lead->email,
                             "custom_fields" => $customFields
                         ];
                         $listname = $lead_counter > 0 ? $affiliateMainCategory->aweber_member_listname : $affiliateMainCategory->aweber_non_member_listname;
@@ -1071,7 +1074,7 @@ class AffiliateLeadController extends Controller
                         Log::debug("Aweber subscribe response");
                         Log::debug(json_encode($subscribeListResponse ));
                     }
-                    
+
                 }
 
                 if (
@@ -1121,16 +1124,16 @@ class AffiliateLeadController extends Controller
             return $regs['domain'];
         }
         return false;
-    }   
+    }
 
     function getTempLogo($name, $slug)
     {
         $path = 'uploads/media/' . $slug . '_temp_logo.png';
-        
+
         if (File::exists(public_path($path))) {
             return env('APP_URL') . '/' . $path;
         }
-        
+
         $sizeOfFont = strlen($name) > 25 ? 12 : 14;
 
         $logo = Image::canvas(200, 100, '#FFFFFF');
@@ -1146,5 +1149,72 @@ class AffiliateLeadController extends Controller
         $logo->save(public_path($path));
         return env('APP_URL') . '/' . $path;
     }
-    
+
+    /**
+     * @param int $homeowner_id
+     * @return JsonResponse
+     */
+    public function getHomeownerLeads($homeowner_id)
+    {
+        try {
+            $leads = Lead::where('homeowner_id', $homeowner_id)
+                ->with([
+                    'service_category_type:id,title',
+                    'main_category:id,title',
+                    'service_category:id,title',
+                    'top_level_category:id,title'
+                ])
+                ->select([
+                    'id',
+                    'homeowner_id',
+                    'service_category_type_id',
+                    'main_category_id',
+                    'service_category_id',
+                    'company_slugs_csv',
+                    'zipcode',
+                    'project_address',
+                    'content',
+                    'created_at'
+                ])
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            if ($leads->isEmpty()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'No leads found for this homeowner.',
+                    'data' => []
+                ], 200);
+            }
+
+            $formattedLeads = $leads->map(function ($lead) {
+                return [
+                    'lead_id'            => $lead->id,
+                    'service_type'       => $lead->service_type->title ?? 'N/A',
+                    'main_category'      => $lead->main_category->title ?? 'N/A',
+                    'category'           => $lead->service_category->title ?? 'N/A',
+                    'top_level_category' => $lead->top_level_category->title ?? 'N/A',
+                    'company_slugs_csv' => $lead->company_slugs_csv  ?? 'N/A',
+                    'address'            => $lead->project_address,
+                    'zip'                => $lead->zipcode,
+                    'description'        => $lead->content,
+                    'date'               => $lead->created_at->format('M d, Y')
+                ];
+            });
+
+            return response()->json([
+                'success' => true,
+                'count'   => $formattedLeads->count(),
+                'data'    => $formattedLeads
+            ], 200);
+
+        } catch (\Exception $e) {
+            \Log::error("Get Homeowner Leads Error: " . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong while fetching leads.'
+            ], 500);
+        }
+    }
+
 }

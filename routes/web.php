@@ -111,7 +111,7 @@ Route::group(['namespace' => 'crons'], function () {
 
 
 /* Find A Pro [Start] */
-Route::group(['namespace' => 'find_a_pro', 'prefix' => 'find-a-pro'], function () {        
+Route::group(['namespace' => 'find_a_pro', 'prefix' => 'find-a-pro'], function () {
     Route::post('/get-maincategories', 'FindAProController@get_maincategories');
     Route::post('/get-servicecategorytypes', 'FindAProController@get_servicecategorytypes');
     Route::post('/get-servicecategories', 'FindAProController@get_servicecategories');
@@ -120,7 +120,7 @@ Route::group(['namespace' => 'find_a_pro', 'prefix' => 'find-a-pro'], function (
 
     Route::post('/generate-lead', 'FindAProController@find_a_pro');
     Route::post('/generate-lead-by-recommened-members', 'FindAProController@find_a_pro_recommended_members_submit');
-    //Route::get('/', 'FindAProController@index');  
+    //Route::get('/', 'FindAProController@index');
     Route::get('/{main_category_slug?}', 'FindAProController@index');
 });
 /* Find A Pro [End] */
@@ -128,10 +128,10 @@ Route::group(['namespace' => 'find_a_pro', 'prefix' => 'find-a-pro'], function (
 Route::group(['namespace' => 'leads'], function () {
         /* Testing purpose leads form start */
     //Route::get('/', [\App\Http\Controllers\find_a_pro\FindAProController::class, 'index']);
-    //Route::get('/', 'find-a-pro/FindAProController@index');      
+    //Route::get('/', 'find-a-pro/FindAProController@index');
     Route::redirect('/', '/find-a-pro');
     Route::get('/find-a-pro', 'LeadController@find_a_pro');
-    
+
     Route::post('/get-service-category-type', 'LeadController@get_service_category_types');
     Route::post('/get-top-level-categories', 'LeadController@get_top_level_categories');
     Route::post('/get-category-selection', 'LeadController@get_category_selection');
@@ -246,7 +246,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
             // Site Logo Reorder
             Route::get('/site_logos/re-order', 'SiteLogoController@reorder');
             Route::post('/site_logos/re-order', 'SiteLogoController@updateOrder');
-           
+
             Route::get('/modules/re-order', 'ModuleController@reorder');
             Route::get('/modules/re-order/{module_category_id}', 'ModuleController@reorder');
             Route::post('/modules/re-order', 'ModuleController@updateOrder');
@@ -468,7 +468,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                 //companies
                 'companies' => 'CompanyController',
                 'company_users' => 'CompanyOwnerController',
-                'site_logos' => 'SiteLogoController',                
+                'site_logos' => 'SiteLogoController',
                 'artworks' => 'ArtworkController',
                 'partner_links' => 'PartnerLinkController',
                 // lead categories
@@ -509,9 +509,9 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
             ]);
 
             Route::get('import-data', 'ImportController@import');
-             Route::get('/secure-file/{path}', [App\Http\Controllers\admin\SecureFileController::class, 'show'])
+             Route::get('/secure-file/{path}', [App\Http\Controllers\Admin\SecureFileController::class, 'show'])
             ->where('path', '.*')
-            ->name('secure.file');    
+            ->name('secure.file');
         });
         // Admin Common Middleware [end]
     });
@@ -525,7 +525,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
 /*      [Front Start]       */
 
 Route::group(['namespace' => 'company'], function () {
-    Route::get('/check-company', 'CompanyController@checkCompany');    
+    Route::get('/check-company', 'CompanyController@checkCompany');
 
     Route::get('/test', 'TestController@index');
     Route::get('/test-shot', 'TestController@shot');
@@ -574,7 +574,7 @@ Route::group(['namespace' => 'company'], function () {
     Route::post('/phone-in-lead/get-servicecategories', 'RegisterController@get_servicecategories');
     Route::get('/phone-in-lead', 'RegisterController@get_phone_in_lead');
     Route::post('/phone-in-lead', 'RegisterController@post_phone_in_lead');
-   
+
 
     Route::post('/register/step1', 'RegisterController@postStep1');
     Route::post('/register/step2', 'RegisterController@postStep2');
@@ -590,7 +590,7 @@ Route::group(['namespace' => 'company'], function () {
     /* Register Company [End] */
 
     // Login
-    //Route::get('/', 'LoginController@getLogin');      
+    //Route::get('/', 'LoginController@getLogin');
     Route::get('/login', 'LoginController@getLogin');
     Route::post('/login', 'LoginController@postLogin');
     Route::get('/logout', 'LoginController@getLogout');
@@ -774,7 +774,7 @@ Route::group(['namespace' => 'company'], function () {
             Route::get('/contact-us', 'CompanyController@contact_us');
             Route::get('/secure-file/{path}', [App\Http\Controllers\company\SecureFileController::class, 'show'])
             ->where('path', '.*')
-            ->name('secure.file.company'); 
+            ->name('secure.file.company');
         });
     });
 

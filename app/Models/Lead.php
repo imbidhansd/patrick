@@ -28,7 +28,7 @@ class Lead extends Model {
         'regarding_your_request', 'special_offers', 'scams_updates', 'general_updates',
         'why_unsubscribe', 'unsubscribe_reason',
         'subscribe', 'subscribe_at', 'unsubscribe_at',
-        'ip_address', 'cert_url', 'affiliate_id',
+        'ip_address', 'cert_url', 'affiliate_id','homeowner_id',
         'signup_url','correlation_id','networx_redirect_url','company_slugs_csv'
     ];
     protected $table = 'leads';
@@ -178,6 +178,10 @@ class Lead extends Model {
 
         $query->select([$this->table . '.*'])->with(['state', 'main_category', 'service_category_type', 'service_category', 'company_lead'])->where('dispute_status', '!=', 'in process')->whereNotNull('dispute_status');
         return $query->paginate($record_per_page);
+    }
+
+    public function homeowner() {
+        return $this->belongsTo(Homeowner::class, 'homeowner_id', 'user_id');
     }
 
     /* Closed Dispute Leads end */
