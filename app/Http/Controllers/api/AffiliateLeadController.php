@@ -439,6 +439,7 @@ class AffiliateLeadController extends Controller
     public function ProcessAffiliateGeneralRequestv1(Request $request)
     {
         $correlationId = Str::uuid()->toString();
+
         Log::channel('custom_db')->info('Job creation started for general lead', [
             'data' => $request->json()->all(),
             'key_identifier' =>  $correlationId,
@@ -492,7 +493,6 @@ class AffiliateLeadController extends Controller
                     'key_identifier' =>  $correlationId,
                     'key_identifier_type' => KeyIdentifierType::GeneralLead
                 ]);
-
             return [
                 'success' => 0,
                 'message' =>$validation_message,
@@ -710,19 +710,16 @@ class AffiliateLeadController extends Controller
             'key_identifier' =>  $correlationId,
             'key_identifier_type' => KeyIdentifierType::GeneralLead
         ]);
-
         $memberSlugsString = $request->input('member_slugs', '');
         // Parse member slugs string into array
         $memberSlugs = array_map('trim', explode(',', $memberSlugsString));
         $memberSlugs = array_filter($memberSlugs); // Remove empty entries
-
         if (empty($memberSlugs)) {
             return response()->json([
                 'success' => 0,
                 'message' => 'No valid member slugs provided'
             ], 400);
         }
-
         $data = [];
         $data['correlation_id'] =  $correlationId;
         $data['ip_address'] = $request->ip();

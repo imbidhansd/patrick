@@ -49,7 +49,6 @@ Route::group([
     Route::post('/affiliate/lead', 'AffiliateLeadController@store');
     Route::post('/populatezipcodes', 'ApiController@populatezipcodes');
     Route::get('/homeowners/leads/{homeowner_id}', 'AffiliateLeadController@getHomeownerLeads');
-
     // Homeowner Authentication & Management
     Route::post('/homeowners/create', 'HomeownerController@store');
     Route::post('/homeowners/login', 'HomeownerController@login');
@@ -62,7 +61,6 @@ Route::group([
     Route::post('/homeowners/forgot-password', 'HomeownerController@forgotPassword');
     Route::post('/homeowners/verify-reset-otp', 'HomeownerController@verifyResetOTP');
     Route::post('/homeowners/reset-password', 'HomeownerController@resetPassword');
-
     // Homeowner Service Search
     Route::get('/homeowners/search-services', 'HomeownerController@searchServices');
 });
